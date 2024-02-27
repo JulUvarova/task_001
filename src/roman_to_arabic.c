@@ -1,5 +1,6 @@
 #include <ctype.h>
 #include <stdio.h>
+#include <string.h>
 #define NMAX 16  // +1 на \0
 
 int input(char str[NMAX], int *size);
@@ -7,9 +8,12 @@ int to_value(char ch);
 
 int main(void) {
     int size = 0;
-    char str[NMAX] = "";
-    if (input(str, &size) == 1) {
+    char str[NMAX];
+    int in = input(str, &size);
+    if (in == 1) {
         printf("Puck you, Verter!");
+    } else if (in == 2) {
+        printf("0");
     } else {
         int res = 0;
         int i = 0;
@@ -35,11 +39,15 @@ int input(char str[NMAX], int *size) {
     while (scanf("%c", &str[count]) == 1 && str[count] != '\n') {
         str[count] = toupper(str[count]);
         if (str[count] != 'I' && str[count] != 'V' && str[count] != 'X' && str[count] != 'L' &&
-            str[count] != 'D' && str[count] != 'M' && str[count] != 'C') {
+            str[count] != 'D' && str[count] != 'M' && str[count] != 'C' && str[count] != 'N' &&
+            str[count] != 'H' && str[count] != 'U' && str[count] != 'A') {
             exit = 1;
             break;
         }
         count++;
+    }
+    if (strcmp(str, "NULLA\n") == 0 || strcmp(str, "N\n") == 0 || strcmp(str, "NIHIL\n") == 0) {
+        exit = 2;
     }
     *size = count;
     return exit;
