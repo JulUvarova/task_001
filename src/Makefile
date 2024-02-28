@@ -1,4 +1,4 @@
-CFLAGS=-Wall -Wextra -Werror
+CFLAGS=-Wall -Wextra -Werror -std=c11
 
 roman_to_arabic: clean roman_to_arabic.c 
 	gcc $(CFLAGS) roman_to_arabic.c

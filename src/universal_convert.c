@@ -70,7 +70,6 @@ int to_roman() {
     int exit = 0;
     int number = 0;
     if (scanf("%d", &number) != 1 || number < 0 || number > 3999) {
-        fprintf(stderr, "%s", "Puck you, Verter!");
         exit = 1;
     } else if (number == 0) {
         printf("nulla");
@@ -116,9 +115,9 @@ void print(int num, char min, char med, char max) {
 }
 
 int input_rom(char str[NMAX], int *size) {
-    int exit = 0;
+ int exit = 0;
     int count = 0;
-    while (scanf("%c", &str[count]) == 1 && str[count] != '\n') {
+    while (scanf("%c", &str[count]) == 1 && str[count] != '\n' && str[count] != ' ') {
         str[count] = toupper(str[count]);
         if (str[count] != 'I' && str[count] != 'V' && str[count] != 'X' && str[count] != 'L' &&
             str[count] != 'D' && str[count] != 'M' && str[count] != 'C' && str[count] != 'N' &&
@@ -128,7 +127,8 @@ int input_rom(char str[NMAX], int *size) {
         }
         count++;
     }
-    if (strcmp(str, "NULLA\n") == 0 || strcmp(str, "N\n") == 0 || strcmp(str, "NIHIL\n") == 0) {
+    str[count] = '\0';
+    if (strcmp(str, "NULLA") == 0 || strcmp(str, "N") == 0 || strcmp(str, "NIHIL") == 0) {
         exit = 2;
     }
     *size = count;

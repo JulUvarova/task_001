@@ -14,7 +14,7 @@ int main(void) {
         fprintf(stderr, "%s", "Puck you, Verter!");
         return 1;
     } else if (in == 2) {
-        printf("%d", 0);
+        printf("0");
     } else {
         int res = 0;
         int i = 0;
@@ -37,7 +37,7 @@ int main(void) {
 int input(char str[NMAX], int *size) {
     int exit = 0;
     int count = 0;
-    while (scanf("%c", &str[count]) == 1 && str[count] != '\n') {
+    while (scanf("%c", &str[count]) == 1 && str[count] != '\n' && str[count] != ' ') {
         str[count] = toupper(str[count]);
         if (str[count] != 'I' && str[count] != 'V' && str[count] != 'X' && str[count] != 'L' &&
             str[count] != 'D' && str[count] != 'M' && str[count] != 'C' && str[count] != 'N' &&
@@ -47,7 +47,8 @@ int input(char str[NMAX], int *size) {
         }
         count++;
     }
-    if (strcmp(str, "NULLA\n") == 0 || strcmp(str, "N\n") == 0 || strcmp(str, "NIHIL\n") == 0) {
+    str[count] = '\0';
+    if (strcmp(str, "NULLA") == 0 || strcmp(str, "N") == 0 || strcmp(str, "NIHIL") == 0) {
         exit = 2;
     }
     *size = count;
