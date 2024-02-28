@@ -8,7 +8,7 @@ int to_value(char ch);
 
 int main(void) {
     int size = 0;
-    char str[NMAX];
+    char str[NMAX] = "";
     int in = input(str, &size);
     if (in == 1) {
         printf("Puck you, Verter!");
@@ -17,7 +17,7 @@ int main(void) {
     } else {
         int res = 0;
         int i = 0;
-        while (i < NMAX) {
+        while (i < size) {
             int prev = to_value(str[i]);
             int next = to_value(str[i + 1]);
             if (prev < next) {

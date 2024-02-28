@@ -16,24 +16,23 @@ int main(void) {
     if (scanf("%d", &case_v) != 1 || case_v < 1 || case_v > 2) {
         printf("Puck you, Verter!");
     } else if (case_v == 1) {
-        clear_stdin();
         to_arabic();
-    } else if (case_v == 2) {
-       // clear_stdin();
+    } else {
         to_roman();
     }
     return 0;
 }
 
 void clear_stdin() {
-        int ch;
-        do {
-            ch = fgetc(stdin);
-        } while (!((ch == '\n') || (ch == '\r') || (ch == EOF)));
+    int ch;
+    do {
+        ch = fgetc(stdin);
+    } while (!((ch == '\n') || (ch == '\r') || (ch == EOF)));
 }
 
 void to_arabic() {
-    char str[NMAX];
+    clear_stdin();
+    char str[NMAX] = "";
     int size = 0;
     int in = input_rom(str, &size);
     if (in == 1) {
@@ -43,7 +42,7 @@ void to_arabic() {
     } else {
         int res = 0;
         int i = 0;
-        while (i < NMAX) {
+        while (i < size) {
             int prev = to_value(str[i]);
             int next = to_value(str[i + 1]);
             if (prev < next) {
@@ -96,7 +95,7 @@ void print(int num, char min, char med, char max) {
         printf("%c%c", min, med);
     } else if (num == 5) {
         printf("%c", med);
-    } else if (num < 9 && num > 5) {
+    } else if (num < 9) {
         printf("%c", med);
         repeat(num - 5, min);
     } else if (num == 9) {
