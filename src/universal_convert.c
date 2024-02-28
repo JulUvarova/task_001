@@ -9,36 +9,18 @@ int to_arabic();
 int to_roman();
 void repeat(int count, char ch);
 void print(int num, char min, char med, char max);
-void clear_stdin();
 
 int main(void) {
     int case_v = 0;
-    if (scanf("%d", &case_v) != 1 || case_v < 1 || case_v > 2) {
+    if ((scanf("%d", &case_v) != 1 || case_v < 1 || case_v > 2) || (case_v == 1 && to_arabic() == 1) ||
+        (case_v == 2 && to_roman() == 1)) {
         fprintf(stderr, "%s", "Puck you, Verter!");
         return 1;
-    } else if (case_v == 1) {
-        if (to_arabic() == 1) {
-            fprintf(stderr, "%s", "Puck you, Verter!");
-            return 1;
-        }
-    } else {
-        if (to_roman() == 1) {
-            fprintf(stderr, "%s", "Puck you, Verter!");
-            return 1;
-        }
     }
     return 0;
 }
 
-void clear_stdin() {
-    int ch;
-    do {
-        ch = fgetc(stdin);
-    } while (!((ch == '\n') || (ch == '\r') || (ch == EOF)));
-}
-
 int to_arabic() {
-    clear_stdin();
     int exit = 0;
     char str[NMAX] = "";
     int size = 0;
@@ -115,23 +97,24 @@ void print(int num, char min, char med, char max) {
 }
 
 int input_rom(char str[NMAX], int *size) {
- int exit = 0;
-    int count = 0;
-    while (scanf("%c", &str[count]) == 1 && str[count] != '\n' && str[count] != ' ') {
-        str[count] = toupper(str[count]);
-        if (str[count] != 'I' && str[count] != 'V' && str[count] != 'X' && str[count] != 'L' &&
-            str[count] != 'D' && str[count] != 'M' && str[count] != 'C' && str[count] != 'N' &&
-            str[count] != 'H' && str[count] != 'U' && str[count] != 'A') {
-            exit = 1;
-            break;
+    int exit = 0;
+    if (scanf("%15s", str) != 1) {
+        exit = 1;
+    } else {
+        *size = strlen(str);
+        for (int i = 0; i < *size; i++) {
+            str[i] = toupper(str[i]);
+            if (str[i] != 'I' && str[i] != 'V' && str[i] != 'X' && str[i] != 'L' && str[i] != 'D' &&
+                str[i] != 'M' && str[i] != 'C' && str[i] != 'N' && str[i] != 'H' && str[i] != 'U' &&
+                str[i] != 'A') {
+                exit = 1;
+                break;
+            }
         }
-        count++;
     }
-    str[count] = '\0';
     if (strcmp(str, "NULLA") == 0 || strcmp(str, "N") == 0 || strcmp(str, "NIHIL") == 0) {
         exit = 2;
     }
-    *size = count;
     return exit;
 }
 
