@@ -44,7 +44,6 @@ int to_arabic() {
     int size = 0;
     int in = input_rom(str, &size);
     if (in == 1) {
-        fprintf(stderr, "%s", "Puck you, Verter!");
         exit = 1;
     } else if (in == 2) {
         printf("0");

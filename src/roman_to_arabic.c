@@ -14,7 +14,7 @@ int main(void) {
         fprintf(stderr, "%s", "Puck you, Verter!");
         return 1;
     } else if (in == 2) {
-        printf("0");
+        printf("%d", 0);
     } else {
         int res = 0;
         int i = 0;
