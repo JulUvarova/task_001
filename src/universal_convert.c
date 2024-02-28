@@ -5,8 +5,8 @@
 
 int input_rom(char str[NMAX], int *size);
 int to_value(char ch);
-void to_arabic();
-void to_roman();
+int to_arabic();
+int to_roman();
 void repeat(int count, char ch);
 void print(int num, char min, char med, char max);
 void clear_stdin();
@@ -14,11 +14,18 @@ void clear_stdin();
 int main(void) {
     int case_v = 0;
     if (scanf("%d", &case_v) != 1 || case_v < 1 || case_v > 2) {
-        printf("Puck you, Verter!");
+        fprintf(stderr, "%s", "Puck you, Verter!");
+        return 1;
     } else if (case_v == 1) {
-        to_arabic();
+        if (to_arabic() == 1) {
+            fprintf(stderr, "%s", "Puck you, Verter!");
+            return 1;
+        }
     } else {
-        to_roman();
+        if (to_roman() == 1) {
+            fprintf(stderr, "%s", "Puck you, Verter!");
+            return 1;
+        }
     }
     return 0;
 }
@@ -30,13 +37,15 @@ void clear_stdin() {
     } while (!((ch == '\n') || (ch == '\r') || (ch == EOF)));
 }
 
-void to_arabic() {
+int to_arabic() {
     clear_stdin();
+    int exit = 0;
     char str[NMAX] = "";
     int size = 0;
     int in = input_rom(str, &size);
     if (in == 1) {
-        printf("Puck you, Verter!");
+        fprintf(stderr, "%s", "Puck you, Verter!");
+        exit = 1;
     } else if (in == 2) {
         printf("0");
     } else {
@@ -55,12 +64,15 @@ void to_arabic() {
         }
         printf("%d", res);
     }
+    return exit;
 }
 
-void to_roman() {
+int to_roman() {
+    int exit = 0;
     int number = 0;
     if (scanf("%d", &number) != 1 || number < 0 || number > 3999) {
-        printf("Puck you, Verter!");
+        fprintf(stderr, "%s", "Puck you, Verter!");
+        exit = 1;
     } else if (number == 0) {
         printf("nulla");
     } else if (number > 999) {
@@ -86,6 +98,7 @@ void to_roman() {
     } else {
         print(number, 'I', 'V', 'X');
     }
+    return exit;
 }
 
 void print(int num, char min, char med, char max) {

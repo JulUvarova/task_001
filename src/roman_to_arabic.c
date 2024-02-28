@@ -11,7 +11,8 @@ int main(void) {
     char str[NMAX] = "";
     int in = input(str, &size);
     if (in == 1) {
-        printf("Puck you, Verter!");
+        fprintf(stderr, "%s", "Puck you, Verter!");
+        return 1;
     } else if (in == 2) {
         printf("0");
     } else {
